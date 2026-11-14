@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff8e8">
+  <title>Kitchen desk · Mi Pizza</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/staff.css">
+  <script src="/staff.js" defer></script>
+</head>
+<body>
+  <main id="app" class="app-shell">
+    <section class="login-screen" id="login-screen" hidden>
+      <a class="brand brand-large" href="/" aria-label="Mi Pizza home"><span class="brand-mark">M<span>i</span></span><span class="brand-name">PIZZA<br><small>NORCROSS, GA</small></span></a>
+      <div class="login-card">
+        <div class="eyebrow">TEAM ACCESS</div>
+        <h1>Good food<br>starts here.</h1>
+        <p>Sign in to open the kitchen desk.</p>
+        <form id="login-form">
+          <label for="pin">Manager PIN</label>
+          <input id="pin" name="pin" type="password" inputmode="numeric" autocomplete="current-password" required placeholder="Enter your PIN">
+          <button class="button button-red button-wide" type="submit">Open kitchen <span aria-hidden="true">↗</span></button>
+          <p class="form-error" id="login-error" role="alert"></p>
+        </form>
+        <p class="login-foot">4935 Jimmy Carter Boulevard · Norcross, GA</p>
+      </div>
+    </section>
+
+    <div id="dashboard" hidden>
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Mi Pizza home"><span class="brand-mark">M<span>i</span></span><span class="brand-name">PIZZA<small>NORCROSS, GA</small></span></a>
+        <div class="topbar-center"><span class="live-dot"></span><span>Kitchen desk</span><span class="today-label" id="today-label"></span></div>
+        <div class="topbar-actions"><a href="/" class="text-link">View shop <span aria-hidden="true">↗</span></a><button class="icon-button" id="logout-button" type="button" aria-label="Sign out" title="Sign out">↗</button></div>
+      </header>
+
+      <div class="page-wrap">
+        <section class="welcome-row">
+          <div><div class="eyebrow">THE GOOD STUFF, IN MOTION</div><h1>On the line<span class="period">.</span></h1><p class="welcome-sub">A clear view of what’s cooking and what’s next.</p></div>
+          <div class="service-control" id="service-control">
+            <span class="service-icon" aria-hidden="true">✳</span>
+            <div><strong id="service-title">Taking orders</strong><small id="service-copy">Online ordering is open</small></div>
+            <button type="button" class="switch" id="accepting-switch" role="switch" aria-checked="true" aria-label="Pause online orders"><span></span></button>
+          </div>
+        </section>
+
+        <section class="stats-grid" aria-label="Today's order summary">
+          <article class="stat-card stat-highlight"><span class="stat-label">ORDERS TODAY</span><strong id="metric-orders">—</strong><span class="stat-note"><span class="metric-dot red"></span>All orders</span><span class="stat-icon" aria-hidden="true">▤</span></article>
+          <article class="stat-card"><span class="stat-label">IN THE KITCHEN</span><strong id="metric-active">—</strong><span class="stat-note"><span class="metric-dot green"></span>Being made now</span><span class="stat-icon" aria-hidden="true">◷</span></article>
+          <article class="stat-card"><span class="stat-label">READY FOR PICKUP</span><strong id="metric-ready">—</strong><span class="stat-note"><span class="metric-dot gold"></span>At the pass</span><span class="stat-icon" aria-hidden="true">✓</span></article>
+          <article class="stat-card eta-card"><label class="stat-label" for="eta-select">CURRENT PREP TIME</label><div class="eta-value"><strong id="metric-eta">20</strong><span>min</span></div><span class="stat-note">Shown to customers</span><label class="sr-only" for="eta-select">Estimated prep time</label><select id="eta-select"><option value="10">10 minutes</option><option value="15">15 minutes</option><option value="20">20 minutes</option><option value="25">25 minutes</option><option value="30">30 minutes</option><option value="40">40 minutes</option><option value="50">50 minutes</option><option value="60">60 minutes</option></select><span class="eta-edit" aria-hidden="true">⌄</span></article>
+        </section>
+
+        <section class="orders-section">
+          <div class="section-head"><div><div class="eyebrow"></div><h2>Order board <span class="count-pill" id="orders-count">0</span></h2></div><div class="head-tools"><span class="synced" id="sync-status"><span class="live-dot"></span>Live updates</span><button class="button button-quiet" type="button" id="refresh-button" aria-label="Refresh orders">↻ <span>Refresh</span></button></div></div>
+          <div class="tabs" role="tablist" aria-label="Filter orders"><button role="tab" aria-selected="true" data-filter="open">Open <span id="open-tab-count">0</span></button><button role="tab" aria-selected="false" data-filter="completed">Completed</button><button role="tab" aria-selected="false" data-filter="all">All orders</button></div>
+          <div class="orders-grid" id="orders-list" aria-live="polite"><div class="loading-state"><span class="spinner"></span>Bringing the kitchen up to speed…</div></div>
+        </section>
+
+        <section class="menu-section">
+          <div class="section-head menu-heading"><div><div class="eyebrow"></div><h2>Menu availability <span class="menu-count" id="menu-count"></span></h2><p class="section-copy">Sold out? Flip an item off. Customers will see it marked sold out.</p></div><label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search menu items</span><input id="menu-search" type="search" placeholder="Find a menu item…"></label></div>
+          <div class="menu-board" id="menu-list"><div class="loading-state"><span class="spinner"></span>Loading menu…</div></div>
+        </section>
+        <footer class="footer"><span>Made with care in Norcross <span class="heart">♥</span></span><a href="tel:7708070548">Need a hand? Call (770) 807-0548</a></footer>
+      </div>
+    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+
+  <dialog class="order-dialog" id="order-dialog" aria-labelledby="dialog-title"><form method="dialog"><button class="dialog-close" aria-label="Close order details">×</button></form><div class="eyebrow" id="dialog-kicker">ORDER DETAILS</div><h2 id="dialog-title">Order</h2><div id="dialog-content"></div></dialog>
+</body>
+</html>
